@@ -1,4 +1,4 @@
-const AMAP_JS_API_KEY = import.meta.env.VITE_AMAP_JS_KEY || ''
+const AMAP_JS_API_KEY = import.meta.env.VITE_AMAP_KEY || ''
 
 declare global {
   interface Window {
