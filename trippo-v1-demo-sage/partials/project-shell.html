@@ -1,0 +1,399 @@
+<section id="trippo-project-shell" data-shell="trippo-project-shell" class="trippo-shell trippo-body">
+  <style>
+    .trippo-shell {
+      position: relative;
+      min-height: 100vh;
+      background: var(--trippo-color-bg-page);
+      color: var(--trippo-color-text-primary);
+      font-family: var(--trippo-font-body);
+      font-size: var(--trippo-text-md);
+      line-height: 1.6;
+    }
+
+    .trippo-shell *,
+    .trippo-shell *::before,
+    .trippo-shell *::after {
+      box-sizing: border-box;
+    }
+
+    .trippo-shell button,
+    .trippo-shell a {
+      font: inherit;
+    }
+
+    .trippo-shell button {
+      border: 0;
+      cursor: pointer;
+      background: transparent;
+    }
+
+    .trippo-appbar,
+    .trippo-tabbar {
+      position: fixed;
+      left: 0;
+      right: 0;
+      z-index: 20;
+      margin: 0 auto;
+      width: min(100%, 480px);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    .trippo-appbar {
+      top: 0;
+      padding: calc(env(safe-area-inset-top, 0px) + var(--trippo-space-2)) var(--trippo-space-4) var(--trippo-space-3);
+      background: color-mix(in srgb, var(--trippo-color-bg-card) 82%, transparent);
+      border-bottom: 1px solid color-mix(in srgb, var(--trippo-color-border) 78%, transparent);
+      box-shadow: var(--trippo-shadow-floating);
+    }
+
+    .trippo-appbar__row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: var(--trippo-space-3);
+    }
+
+    .trippo-appbar__title {
+      margin: 0;
+      min-width: 0;
+      color: var(--trippo-color-text-primary);
+      font-family: var(--trippo-font-title);
+      font-size: var(--trippo-text-xl);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.04em;
+      text-wrap: balance;
+      word-break: keep-all;
+      overflow-wrap: break-word;
+    }
+
+    .trippo-appbar__badge {
+      display: inline-flex;
+      min-height: 28px;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 0 var(--trippo-space-3);
+      border-radius: var(--trippo-radius-lg);
+      background: var(--trippo-color-primary-softer);
+      color: var(--trippo-color-primary-strong);
+      font-size: var(--trippo-text-sm);
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .trippo-shell__main {
+      display: block;
+      padding: calc(env(safe-area-inset-top, 0px) + 88px) var(--trippo-space-4) calc(env(safe-area-inset-bottom, 0px) + 104px);
+    }
+
+    .trippo-shell__content {
+      display: flex;
+      flex-direction: column;
+      gap: var(--trippo-space-5);
+      min-height: calc(100vh - 192px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+    }
+
+    .trippo-content-section {
+      display: flex;
+      flex-direction: column;
+      gap: var(--trippo-space-4);
+    }
+
+    .trippo-card {
+      display: flex;
+      flex-direction: column;
+      gap: var(--trippo-space-3);
+      padding: var(--trippo-space-5);
+      border: 1px solid var(--trippo-color-border);
+      border-radius: var(--trippo-radius-lg);
+      background: var(--trippo-color-bg-card);
+    }
+
+    .trippo-card--compact {
+      padding: var(--trippo-space-4);
+      border-radius: var(--trippo-radius-md);
+    }
+
+    .trippo-card__title {
+      margin: 0;
+      color: var(--trippo-color-text-primary);
+      font-family: var(--trippo-font-title);
+      font-size: var(--trippo-text-lg);
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      text-wrap: balance;
+      word-break: keep-all;
+      overflow-wrap: break-word;
+    }
+
+    .trippo-card__body,
+    .trippo-body-muted {
+      margin: 0;
+      color: var(--trippo-color-text-secondary);
+      font-size: var(--trippo-text-md);
+      line-height: 1.6;
+    }
+
+    .trippo-caption-text {
+      margin: 0;
+      color: var(--trippo-color-text-tertiary);
+      font-size: var(--trippo-text-sm);
+      line-height: 1.5;
+    }
+
+    .trippo-chip-row,
+    .trippo-button-row,
+    .trippo-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--trippo-space-2);
+    }
+
+    .trippo-chip {
+      display: inline-flex;
+      min-height: 24px;
+      align-items: center;
+      justify-content: center;
+      padding: 0 var(--trippo-space-3);
+      border-radius: var(--trippo-radius-md);
+      background: var(--trippo-color-primary-soft);
+      color: var(--trippo-color-primary-strong);
+      font-size: var(--trippo-text-sm);
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .trippo-chip--neutral {
+      background: var(--trippo-color-bg-subtle);
+      color: var(--trippo-color-text-secondary);
+    }
+
+    .trippo-primary-btn,
+    .trippo-secondary-btn {
+      display: inline-flex;
+      min-height: 44px;
+      align-items: center;
+      justify-content: center;
+      gap: var(--trippo-space-2);
+      padding: 0 var(--trippo-space-5);
+      border-radius: var(--trippo-radius-md);
+      font-size: var(--trippo-text-md);
+      font-weight: 600;
+      line-height: 1;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background-color 140ms cubic-bezier(.2,.8,.2,1), color 140ms cubic-bezier(.2,.8,.2,1), border-color 140ms cubic-bezier(.2,.8,.2,1), transform 140ms cubic-bezier(.2,.8,.2,1);
+    }
+
+    .trippo-primary-btn {
+      background: var(--trippo-color-primary);
+      color: var(--trippo-color-text-on-primary);
+    }
+
+    .trippo-secondary-btn {
+      border: 1px solid var(--trippo-color-border);
+      background: var(--trippo-color-bg-card);
+      color: var(--trippo-color-text-primary);
+    }
+
+    .trippo-primary-btn:focus-visible,
+    .trippo-secondary-btn:focus-visible,
+    .trippo-tabbar__item:focus-visible {
+      outline: 2px solid var(--trippo-color-primary-strong);
+      outline-offset: 2px;
+    }
+
+    .trippo-primary-btn:active,
+    .trippo-secondary-btn:active,
+    .trippo-tabbar__item:active {
+      transform: translateY(0);
+    }
+
+    .trippo-primary-btn:disabled,
+    .trippo-secondary-btn:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .trippo-list {
+      display: flex;
+      flex-direction: column;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      border-top: 1px solid var(--trippo-color-border);
+    }
+
+    .trippo-list__row {
+      display: flex;
+      min-height: 56px;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--trippo-space-4);
+      padding: var(--trippo-space-4) 0;
+      border-bottom: 1px solid var(--trippo-color-border);
+    }
+
+    .trippo-list__main {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      align-items: flex-start;
+    }
+
+    .trippo-list__title {
+      margin: 0;
+      color: var(--trippo-color-text-primary);
+      font-size: var(--trippo-text-md);
+      font-weight: 600;
+      line-height: 1.4;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .trippo-list__meta {
+      margin: 0;
+      color: var(--trippo-color-text-secondary);
+      font-size: var(--trippo-text-sm);
+      line-height: 1.5;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .trippo-tabbar {
+      bottom: 0;
+      padding: var(--trippo-space-2) var(--trippo-space-4) calc(env(safe-area-inset-bottom, 0px) + var(--trippo-space-2));
+      background: color-mix(in srgb, var(--trippo-color-bg-card) 88%, transparent);
+      border-top: 1px solid color-mix(in srgb, var(--trippo-color-border) 82%, transparent);
+      box-shadow: var(--trippo-shadow-floating);
+    }
+
+    .trippo-tabbar__rail {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: var(--trippo-space-2);
+      align-items: center;
+    }
+
+    .trippo-tabbar__item {
+      display: inline-flex;
+      min-height: 56px;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: var(--trippo-space-2);
+      border-radius: var(--trippo-radius-md);
+      color: var(--trippo-color-text-secondary);
+      white-space: nowrap;
+      transition: background-color 140ms cubic-bezier(.2,.8,.2,1), color 140ms cubic-bezier(.2,.8,.2,1), transform 140ms cubic-bezier(.2,.8,.2,1);
+    }
+
+    .trippo-tabbar__icon {
+      width: 18px;
+      height: 18px;
+      stroke-width: 1.75;
+      transition: transform 140ms cubic-bezier(.2,.8,.2,1);
+    }
+
+    .trippo-tabbar__label {
+      font-size: var(--trippo-text-sm);
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .trippo-tabbar[data-active-tab="trip-list"] [data-tab-key="trip-list"],
+    .trippo-tabbar[data-active-tab="trip-detail"] [data-tab-key="trip-detail"],
+    .trippo-tabbar[data-active-tab="route-plan"] [data-tab-key="route-plan"],
+    .trippo-tabbar[data-active-tab="journal"] [data-tab-key="journal"] {
+      background: var(--trippo-color-primary-soft);
+      color: var(--trippo-color-primary-strong);
+    }
+
+    .trippo-tabbar[data-active-tab="trip-list"] [data-tab-key="trip-list"] .trippo-tabbar__icon,
+    .trippo-tabbar[data-active-tab="trip-detail"] [data-tab-key="trip-detail"] .trippo-tabbar__icon,
+    .trippo-tabbar[data-active-tab="route-plan"] [data-tab-key="route-plan"] .trippo-tabbar__icon,
+    .trippo-tabbar[data-active-tab="journal"] [data-tab-key="journal"] .trippo-tabbar__icon {
+      transform: translateY(-1px);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .trippo-primary-btn:hover,
+      .trippo-secondary-btn:hover {
+        transform: translateY(-1px);
+      }
+
+      .trippo-primary-btn:hover {
+        background: var(--trippo-color-primary-strong);
+      }
+
+      .trippo-secondary-btn:hover {
+        background: var(--trippo-color-bg-subtle);
+      }
+
+      .trippo-tabbar__item:hover {
+        background: var(--trippo-color-primary-softer);
+        color: var(--trippo-color-primary-strong);
+      }
+
+      .trippo-tabbar__item:hover .trippo-tabbar__icon {
+        transform: translateY(-1px);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .trippo-shell *,
+      .trippo-shell *::before,
+      .trippo-shell *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+
+  <header class="trippo-appbar" aria-label="Trippo 顶部栏">
+    <div class="trippo-appbar__row">
+      <!-- SLOT: pageTitle -->
+      <h1 class="trippo-appbar__title" data-slot="pageTitle">行程</h1>
+      <span class="trippo-appbar__badge" aria-label="品牌标识">旅啵</span>
+    </div>
+  </header>
+
+  <main class="trippo-shell__main" aria-label="Trippo 页面主体">
+    <div class="trippo-shell__content">
+      <!-- SLOT: pageContent -->
+    </div>
+  </main>
+
+  <!-- SLOT: activeTab | 仅替换 nav[data-active-tab] 的值 -->
+  <nav class="trippo-tabbar" data-slot="activeTab" data-active-tab="trip-list" aria-label="Trippo 底部导航">
+    <div class="trippo-tabbar__rail">
+      <button type="button" class="trippo-tabbar__item" data-tab-key="trip-list" data-dom-id="tab-trip-list" aria-label="行程">
+        <i data-lucide="map" class="trippo-tabbar__icon" aria-hidden="true"></i>
+        <span class="trippo-tabbar__label">行程</span>
+      </button>
+      <button type="button" class="trippo-tabbar__item" data-tab-key="trip-detail" data-dom-id="tab-trip-detail" aria-label="详情">
+        <i data-lucide="compass" class="trippo-tabbar__icon" aria-hidden="true"></i>
+        <span class="trippo-tabbar__label">详情</span>
+      </button>
+      <button type="button" class="trippo-tabbar__item" data-tab-key="route-plan" data-dom-id="tab-route-plan" aria-label="路线">
+        <i data-lucide="route" class="trippo-tabbar__icon" aria-hidden="true"></i>
+        <span class="trippo-tabbar__label">路线</span>
+      </button>
+      <button type="button" class="trippo-tabbar__item" data-tab-key="journal" data-dom-id="tab-journal" aria-label="手账">
+        <i data-lucide="book-open" class="trippo-tabbar__icon" aria-hidden="true"></i>
+        <span class="trippo-tabbar__label">手账</span>
+      </button>
+    </div>
+  </nav>
+</section>

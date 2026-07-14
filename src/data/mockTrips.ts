@@ -1,0 +1,40 @@
+import type { Trip } from '../types'
+
+export const mockTrips: Trip[] = [
+  {
+    id: 'trip-demo-1',
+    title: '东京五日游',
+    destination: '日本·东京',
+    startDate: '2026-07-10',
+    endDate: '2026-07-14',
+    coverImage: '',
+    status: 'upcoming',
+    createdAt: '2026-06-20T10:00:00Z',
+    updatedAt: '2026-06-20T10:00:00Z',
+    description: '第一次去东京，打卡经典景点',
+  },
+  {
+    id: 'trip-demo-3',
+    title: '云南自驾游',
+    destination: '中国·云南',
+    startDate: '2026-07-05',
+    endDate: '2026-07-12',
+    coverImage: '',
+    status: 'ongoing',
+    createdAt: '2026-06-15T08:00:00Z',
+    updatedAt: '2026-07-05T09:00:00Z',
+    description: '大理、丽江、香格里拉环线',
+  },
+  {
+    id: 'trip-demo-2',
+    title: '杭州周末',
+    destination: '中国·杭州',
+    startDate: '2026-06-15',
+    endDate: '2026-06-16',
+    coverImage: '',
+    status: 'completed',
+    createdAt: '2026-06-10T08:00:00Z',
+    updatedAt: '2026-06-17T12:00:00Z',
+    description: '西湖漫步 + 灵隐寺',
+  },
+]

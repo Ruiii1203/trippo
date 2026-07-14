@@ -1,0 +1,112 @@
+{
+  "root": {
+    "nodeId": "gen-project-shell",
+    "kind": "project-shell",
+    "pageIds": [
+      "page-trip-list",
+      "page-trip-detail",
+      "page-route-plan",
+      "page-journal"
+    ],
+    "output": "partials/project-shell.html",
+    "sharedRegions": [
+      "mobile app frame",
+      "global warm background",
+      "top app bar",
+      "bottom tab bar",
+      "shared color and typography language"
+    ],
+    "privateRegions": [],
+    "mutableSlots": [
+      "pageTitle",
+      "activeTab"
+    ],
+    "status": "generated",
+    "children": [
+      {
+        "nodeId": "gen-page-trip-list",
+        "kind": "page-leaf",
+        "pageIds": [
+          "page-trip-list"
+        ],
+        "output": "pages/trip-list.html",
+        "sharedRegions": [],
+        "privateRegions": [
+          "trip list hero",
+          "trip cards",
+          "progress module",
+          "empty secondary action strip"
+        ],
+        "mutableSlots": [
+          "pageTitle",
+          "activeTab"
+        ],
+        "status": "generated",
+        "children": []
+      },
+      {
+        "nodeId": "gen-page-trip-detail",
+        "kind": "page-leaf",
+        "pageIds": [
+          "page-trip-detail"
+        ],
+        "output": "pages/trip-detail.html",
+        "sharedRegions": [],
+        "privateRegions": [
+          "trip summary hero",
+          "today focus card",
+          "module entry cards",
+          "gentle status strip"
+        ],
+        "mutableSlots": [
+          "pageTitle",
+          "activeTab"
+        ],
+        "status": "generated",
+        "children": []
+      },
+      {
+        "nodeId": "gen-page-route-plan",
+        "kind": "page-leaf",
+        "pageIds": [
+          "page-route-plan"
+        ],
+        "output": "pages/route-plan.html",
+        "sharedRegions": [],
+        "privateRegions": [
+          "day switch tabs",
+          "route list",
+          "route order markers",
+          "action footer"
+        ],
+        "mutableSlots": [
+          "pageTitle",
+          "activeTab"
+        ],
+        "status": "generated",
+        "children": []
+      },
+      {
+        "nodeId": "gen-page-journal",
+        "kind": "page-leaf",
+        "pageIds": [
+          "page-journal"
+        ],
+        "output": "pages/journal.html",
+        "sharedRegions": [],
+        "privateRegions": [
+          "journal hero",
+          "memory cards",
+          "timeline blocks",
+          "cta footer"
+        ],
+        "mutableSlots": [
+          "pageTitle",
+          "activeTab"
+        ],
+        "status": "generated",
+        "children": []
+      }
+    ]
+  }
+}

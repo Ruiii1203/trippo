@@ -1,0 +1,188 @@
+{
+  "data": [
+    {
+      "id": "page-trip-list",
+      "title": "行程列表",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1782287000000,
+      "canvasData": {
+        "x": 0,
+        "y": 0,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/trip-list.html",
+        "interactions": [
+          {
+            "domId": "cta-trip-detail",
+            "targetPageId": "page-trip-detail",
+            "transitionLabel": "继续这趟旅程"
+          },
+          {
+            "domId": "tab-trip-detail",
+            "targetPageId": "page-trip-detail",
+            "hideEdge": true,
+            "transitionLabel": "切换到详情"
+          },
+          {
+            "domId": "tab-route-plan",
+            "targetPageId": "page-route-plan",
+            "hideEdge": true,
+            "transitionLabel": "切换到路线"
+          },
+          {
+            "domId": "tab-journal",
+            "targetPageId": "page-journal",
+            "hideEdge": true,
+            "transitionLabel": "切换到手账"
+          }
+        ]
+      }
+    },
+    {
+      "id": "page-trip-detail",
+      "title": "行程详情",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1782287000000,
+      "canvasData": {
+        "x": 420,
+        "y": 0,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/trip-detail.html",
+        "interactions": [
+          {
+            "domId": "cta-route-plan",
+            "targetPageId": "page-route-plan",
+            "transitionLabel": "去排路线"
+          },
+          {
+            "domId": "back-trip-list",
+            "targetPageId": "page-trip-list",
+            "hideEdge": true,
+            "transitionLabel": "返回行程"
+          },
+          {
+            "domId": "shortcut-journal",
+            "targetPageId": "page-journal",
+            "hideEdge": true,
+            "transitionLabel": "看看手账"
+          },
+          {
+            "domId": "tab-trip-list",
+            "targetPageId": "page-trip-list",
+            "hideEdge": true,
+            "transitionLabel": "切换到行程"
+          },
+          {
+            "domId": "tab-route-plan",
+            "targetPageId": "page-route-plan",
+            "hideEdge": true,
+            "transitionLabel": "切换到路线"
+          },
+          {
+            "domId": "tab-journal",
+            "targetPageId": "page-journal",
+            "hideEdge": true,
+            "transitionLabel": "切换到手账"
+          }
+        ]
+      }
+    },
+    {
+      "id": "page-route-plan",
+      "title": "每日路线",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1782287000000,
+      "canvasData": {
+        "x": 840,
+        "y": 0,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/route-plan.html",
+        "interactions": [
+          {
+            "domId": "cta-journal",
+            "targetPageId": "page-journal",
+            "transitionLabel": "整理手账"
+          },
+          {
+            "domId": "back-trip-detail",
+            "targetPageId": "page-trip-detail",
+            "hideEdge": true,
+            "transitionLabel": "返回详情"
+          },
+          {
+            "domId": "tab-trip-list",
+            "targetPageId": "page-trip-list",
+            "hideEdge": true,
+            "transitionLabel": "切换到行程"
+          },
+          {
+            "domId": "tab-trip-detail",
+            "targetPageId": "page-trip-detail",
+            "hideEdge": true,
+            "transitionLabel": "切换到详情"
+          },
+          {
+            "domId": "tab-journal",
+            "targetPageId": "page-journal",
+            "hideEdge": true,
+            "transitionLabel": "切换到手账"
+          }
+        ]
+      }
+    },
+    {
+      "id": "page-journal",
+      "title": "旅行手账",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1782287000000,
+      "canvasData": {
+        "x": 1260,
+        "y": 0,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/journal.html",
+        "interactions": [
+          {
+            "domId": "back-trip-detail",
+            "targetPageId": "page-trip-detail",
+            "hideEdge": true,
+            "transitionLabel": "返回详情"
+          },
+          {
+            "domId": "tab-trip-list",
+            "targetPageId": "page-trip-list",
+            "hideEdge": true,
+            "transitionLabel": "切换到行程"
+          },
+          {
+            "domId": "tab-trip-detail",
+            "targetPageId": "page-trip-detail",
+            "hideEdge": true,
+            "transitionLabel": "切换到详情"
+          },
+          {
+            "domId": "tab-route-plan",
+            "targetPageId": "page-route-plan",
+            "hideEdge": true,
+            "transitionLabel": "切换到路线"
+          }
+        ]
+      }
+    }
+  ],
+  "config": {
+    "autoLayout": true,
+    "deviceType": "mobile",
+    "projectName": "Trippo V1 移动端 Demo"
+  }
+}

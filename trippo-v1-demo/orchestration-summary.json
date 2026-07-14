@@ -1,0 +1,519 @@
+{
+  "project": {
+    "name": "Trippo V1 移动端 Demo",
+    "path": "/Users/bytedance/Desktop/VibeCoding/Trippo/trippo-v1-demo",
+    "operation": "create",
+    "deviceType": "mobile",
+    "language": "zh-CN",
+    "dashboardMode": false,
+    "replicationMode": null,
+    "sourceUrl": null,
+    "visualSpecExcerpt": null,
+    "styleDefinitionBrief": "Trippo V1 移动端 demo，清爽旅行感为骨架，温柔陪伴感为情绪补充，低饱和湖水青绿配暖灰白底，轻盈有呼吸感。",
+    "designRead": "旅行陪伴型移动产品 / 自由行用户 / 清爽温柔 / 中低密度 / 避免甜腻社交感",
+    "designDials": {
+      "layoutVariance": 2,
+      "motionIntensity": 2,
+      "visualDensity": 3
+    },
+    "styleContinuityAnchors": {
+      "colorSystem": {
+        "primaryColorRole": "低饱和湖水青绿用于主按钮、选中态、关键数字与核心标签",
+        "brandHuePolicy": "不使用第二品牌色或高饱和点缀色，整体以暖灰白底和主色深浅层完成层次",
+        "stateColors": "仅使用 success warning error info 作为语义状态色，不承担品牌识别"
+      },
+      "shapeSystem": "卡片和输入框以 8px 与 16px 为主，整体克制、柔和，不使用超大圆角气泡感",
+      "typographySystem": "全局使用现代中文无衬线，标题偏紧凑，正文舒展，避免内容页面过度杂志化",
+      "spacingSystem": "移动端以 12 16 20 24 为核心节奏，强调留白和扫读效率",
+      "componentLanguage": "卡片干净、边框轻、阴影弱，模块之间通过层级与间距而不是装饰来区分",
+      "surfaceAndDepth": "页面暖灰白，卡片近白，静态模块以边框与极浅阴影建立层次，浮层才使用更明显悬浮感",
+      "imageryAndIconography": "以线性或轻填充图标替代 emoji 主导界面，旅行气质来自路线、票据、地图点、相机等元素",
+      "interactionTone": "反馈轻柔、明确、不过度弹跳，像贴心引导而不是活泼社交产品"
+    },
+    "specsConstraints": null,
+    "sharedProjectShellContract": {
+      "navigationShell": "顶部是半透明暖白 app bar，底部是 4 项 tab bar，当前项用主色浅底和深色文字强调",
+      "primaryColorSystem": "单一主色系统，按钮、选中态、关键数字与焦点统一使用主色轴",
+      "typographySystem": "标题 24/18，正文 15，说明 13，整体现代、温和、清楚",
+      "radiusScale": "4/8/16/9999，卡片和主按钮保持统一圆角纪律",
+      "surfaceDepthModel": "静态模块以浅边框加极轻阴影为主，不使用厚重投影和强渐变",
+      "ctaStyle": "主按钮为实底主色长条按钮，次按钮为浅底边框按钮，文案简短直接",
+      "alignmentRules": "所有页面保持单列移动端节奏，标题、说明、按钮和卡片边缘统一对齐"
+    },
+    "generationTree": {
+      "root": {
+        "nodeId": "gen-project-shell",
+        "kind": "project-shell",
+        "pageIds": [
+          "page-trip-list",
+          "page-trip-detail",
+          "page-route-plan",
+          "page-journal"
+        ],
+        "output": "partials/project-shell.html",
+        "sharedRegions": [
+          "mobile app frame",
+          "global warm background",
+          "top app bar",
+          "bottom tab bar",
+          "shared color and typography language"
+        ],
+        "privateRegions": [],
+        "mutableSlots": [
+          "pageTitle",
+          "activeTab"
+        ],
+        "status": "generated",
+        "children": [
+          {
+            "nodeId": "gen-page-trip-list",
+            "kind": "page-leaf",
+            "pageIds": [
+              "page-trip-list"
+            ],
+            "output": "pages/trip-list.html",
+            "sharedRegions": [],
+            "privateRegions": [
+              "trip list hero",
+              "trip cards",
+              "progress module",
+              "empty secondary action strip"
+            ],
+            "mutableSlots": [
+              "pageTitle",
+              "activeTab"
+            ],
+            "status": "generated",
+            "children": []
+          },
+          {
+            "nodeId": "gen-page-trip-detail",
+            "kind": "page-leaf",
+            "pageIds": [
+              "page-trip-detail"
+            ],
+            "output": "pages/trip-detail.html",
+            "sharedRegions": [],
+            "privateRegions": [
+              "trip summary hero",
+              "today focus card",
+              "module entry cards",
+              "gentle status strip"
+            ],
+            "mutableSlots": [
+              "pageTitle",
+              "activeTab"
+            ],
+            "status": "generated",
+            "children": []
+          },
+          {
+            "nodeId": "gen-page-route-plan",
+            "kind": "page-leaf",
+            "pageIds": [
+              "page-route-plan"
+            ],
+            "output": "pages/route-plan.html",
+            "sharedRegions": [],
+            "privateRegions": [
+              "day switch tabs",
+              "route list",
+              "route order markers",
+              "action footer"
+            ],
+            "mutableSlots": [
+              "pageTitle",
+              "activeTab"
+            ],
+            "status": "generated",
+            "children": []
+          },
+          {
+            "nodeId": "gen-page-journal",
+            "kind": "page-leaf",
+            "pageIds": [
+              "page-journal"
+            ],
+            "output": "pages/journal.html",
+            "sharedRegions": [],
+            "privateRegions": [
+              "journal hero",
+              "memory cards",
+              "timeline blocks",
+              "cta footer"
+            ],
+            "mutableSlots": [
+              "pageTitle",
+              "activeTab"
+            ],
+            "status": "generated",
+            "children": []
+          }
+        ]
+      }
+    }
+  },
+  "designSource": {
+    "operatingMode": "free-explore",
+    "libraryIdentity": {
+      "name": null,
+      "id": null,
+      "version": null,
+      "scope": null,
+      "path": null,
+      "versionSource": null
+    },
+    "libraryPath": null,
+    "cssFilePath": "/Users/bytedance/Desktop/VibeCoding/Trippo/trippo-v1-demo/colors_and_type.css",
+    "brandPrefix": "trippo",
+    "themeMode": "light",
+    "designDecisionSummary": "Trippo V1 demo 采用清爽旅行感与温柔陪伴感结合的移动端视觉语言，低饱和湖水青绿为单一品牌主色，暖灰白为背景基底，所有页面强调轻量、清晰、单手易用。",
+    "componentContractKind": null,
+    "forbiddenInventedComponents": [],
+    "allowedComponents": [],
+    "styleConstraints": {
+      "radiusMax": 16,
+      "spacingBase": 4,
+      "fontSizeBody": 15,
+      "fontSizeMin": 11,
+      "controlHeightDefault": 44,
+      "controlHeightLarge": 52,
+      "staticShadowAlphaMax": 0.05
+    },
+    "productContext": {
+      "kitType": "travel-companion-mobile-demo",
+      "productType": "V1 旅行记录与规划产品"
+    },
+    "actualTokenNameReference": []
+  },
+  "pages": [
+    {
+      "nodeId": "page-trip-list",
+      "slug": "trip-list",
+      "title": "行程列表",
+      "htmlSrc": "pages/trip-list.html",
+      "pageIndex": 1,
+      "stateGroupId": null,
+      "stateRole": null,
+      "baseStatePageId": null,
+      "sharedShellContract": [],
+      "mutableRegions": [],
+      "derivedFromHtmlSrc": null,
+      "derivationType": "original",
+      "sourcePageId": null,
+      "sourceHtmlSrc": null,
+      "pageType": "task-driven",
+      "businessScenario": "用户进入 Trippo 后查看当前旅行，并快速开始新的行程规划",
+      "visualNorthStar": "像一张温柔但高效的旅行总览卡片墙，让用户一眼看见当前最该继续的那趟旅行",
+      "compositionPattern": "single-column mobile narrative with strong hero summary and stacked task cards",
+      "continuityAnchors": [
+        "暖灰白页面基底",
+        "主色按钮与选中态",
+        "轻边框卡片系统"
+      ],
+      "libraryRestraintMode": false,
+      "uiKitPath": null,
+      "componentPlan": [],
+      "imagePlan": [],
+      "chartsRequired": false,
+      "miniProgramStyle": false,
+      "qualityRisks": [
+        "移动端首屏信息过密",
+        "创建按钮不够明确"
+      ],
+      "generationNodeId": "gen-page-trip-list",
+      "generationPath": [
+        "gen-project-shell",
+        "gen-page-trip-list"
+      ],
+      "inheritedFragments": [
+        "partials/project-shell.html"
+      ],
+      "privateRegions": [
+        "trip list hero",
+        "trip cards",
+        "progress module",
+        "empty secondary action strip"
+      ]
+    },
+    {
+      "nodeId": "page-trip-detail",
+      "slug": "trip-detail",
+      "title": "行程详情",
+      "htmlSrc": "pages/trip-detail.html",
+      "pageIndex": 2,
+      "stateGroupId": null,
+      "stateRole": null,
+      "baseStatePageId": null,
+      "sharedShellContract": [],
+      "mutableRegions": [],
+      "derivedFromHtmlSrc": null,
+      "derivationType": "original",
+      "sourcePageId": null,
+      "sourceHtmlSrc": null,
+      "pageType": "task-driven",
+      "businessScenario": "用户在某趟旅行中查看总览、今天去哪以及下一步该进入哪个模块",
+      "visualNorthStar": "把行程详情做成真正的中枢页，先给安心感，再给清晰动作引导",
+      "compositionPattern": "summary hero plus prioritized action modules",
+      "continuityAnchors": [
+        "暖灰白页面基底",
+        "主色按钮与选中态",
+        "轻边框卡片系统"
+      ],
+      "libraryRestraintMode": false,
+      "uiKitPath": null,
+      "componentPlan": [],
+      "imagePlan": [],
+      "chartsRequired": false,
+      "miniProgramStyle": false,
+      "qualityRisks": [
+        "入口卡片平均用力",
+        "今天行程不够突出"
+      ],
+      "generationNodeId": "gen-page-trip-detail",
+      "generationPath": [
+        "gen-project-shell",
+        "gen-page-trip-detail"
+      ],
+      "inheritedFragments": [
+        "partials/project-shell.html"
+      ],
+      "privateRegions": [
+        "trip summary hero",
+        "today focus card",
+        "module entry cards",
+        "gentle status strip"
+      ]
+    },
+    {
+      "nodeId": "page-route-plan",
+      "slug": "route-plan",
+      "title": "每日路线",
+      "htmlSrc": "pages/route-plan.html",
+      "pageIndex": 3,
+      "stateGroupId": null,
+      "stateRole": null,
+      "baseStatePageId": null,
+      "sharedShellContract": [],
+      "mutableRegions": [],
+      "derivedFromHtmlSrc": null,
+      "derivationType": "original",
+      "sourcePageId": null,
+      "sourceHtmlSrc": null,
+      "pageType": "task-driven",
+      "businessScenario": "用户按天查看和整理当天路线，确认顺序、节奏和打卡动作",
+      "visualNorthStar": "像一张能马上执行的旅行日程单，顺序、轻重和状态一眼能懂",
+      "compositionPattern": "sticky day switcher with stacked execution cards",
+      "continuityAnchors": [
+        "暖灰白页面基底",
+        "主色按钮与选中态",
+        "轻边框卡片系统"
+      ],
+      "libraryRestraintMode": false,
+      "uiKitPath": null,
+      "componentPlan": [],
+      "imagePlan": [],
+      "chartsRequired": false,
+      "miniProgramStyle": false,
+      "qualityRisks": [
+        "路线顺序不够明显",
+        "按钮层级混乱"
+      ],
+      "generationNodeId": "gen-page-route-plan",
+      "generationPath": [
+        "gen-project-shell",
+        "gen-page-route-plan"
+      ],
+      "inheritedFragments": [
+        "partials/project-shell.html"
+      ],
+      "privateRegions": [
+        "day switch tabs",
+        "route list",
+        "route order markers",
+        "action footer"
+      ]
+    },
+    {
+      "nodeId": "page-journal",
+      "slug": "journal",
+      "title": "旅行手账",
+      "htmlSrc": "pages/journal.html",
+      "pageIndex": 4,
+      "stateGroupId": null,
+      "stateRole": null,
+      "baseStatePageId": null,
+      "sharedShellContract": [],
+      "mutableRegions": [],
+      "derivedFromHtmlSrc": null,
+      "derivationType": "original",
+      "sourcePageId": null,
+      "sourceHtmlSrc": null,
+      "pageType": "showcase",
+      "businessScenario": "用户在旅行后轻整理打卡内容，快速生成一页有情绪但不繁复的旅行手账",
+      "visualNorthStar": "保留一点手账氛围和回忆感，但依然像同一套产品里的页面，不脱离整体系统",
+      "compositionPattern": "editorial memory stack with calm primary CTA",
+      "continuityAnchors": [
+        "暖灰白页面基底",
+        "主色按钮与选中态",
+        "轻边框卡片系统"
+      ],
+      "libraryRestraintMode": false,
+      "uiKitPath": null,
+      "componentPlan": [],
+      "imagePlan": [],
+      "chartsRequired": false,
+      "miniProgramStyle": false,
+      "qualityRisks": [
+        "手账页过度文艺导致脱离主产品",
+        "排版太满失去呼吸感"
+      ],
+      "generationNodeId": "gen-page-journal",
+      "generationPath": [
+        "gen-project-shell",
+        "gen-page-journal"
+      ],
+      "inheritedFragments": [
+        "partials/project-shell.html"
+      ],
+      "privateRegions": [
+        "journal hero",
+        "memory cards",
+        "timeline blocks",
+        "cta footer"
+      ]
+    }
+  ],
+  "assets": [],
+  "wiringPlan": [
+    {
+      "sourceNodeId": "page-trip-list",
+      "domId": "cta-trip-detail",
+      "targetPageId": "page-trip-detail"
+    },
+    {
+      "sourceNodeId": "page-trip-detail",
+      "domId": "cta-route-plan",
+      "targetPageId": "page-route-plan"
+    },
+    {
+      "sourceNodeId": "page-route-plan",
+      "domId": "cta-journal",
+      "targetPageId": "page-journal"
+    }
+  ],
+  "hiddenInteractionPlan": [
+    {
+      "sourceNodeId": "page-trip-list",
+      "domId": "tab-trip-detail",
+      "targetPageId": "page-trip-detail",
+      "hideEdge": true,
+      "reason": "global nav"
+    },
+    {
+      "sourceNodeId": "page-trip-list",
+      "domId": "tab-route-plan",
+      "targetPageId": "page-route-plan",
+      "hideEdge": true,
+      "reason": "global nav"
+    },
+    {
+      "sourceNodeId": "page-trip-list",
+      "domId": "tab-journal",
+      "targetPageId": "page-journal",
+      "hideEdge": true,
+      "reason": "global nav"
+    },
+    {
+      "sourceNodeId": "page-trip-detail",
+      "domId": "tab-trip-list",
+      "targetPageId": "page-trip-list",
+      "hideEdge": true,
+      "reason": "global nav"
+    },
+    {
+      "sourceNodeId": "page-trip-detail",
+      "domId": "tab-route-plan",
+      "targetPageId": "page-route-plan",
+      "hideEdge": true,
+      "reason": "global nav"
+    },
+    {
+      "sourceNodeId": "page-trip-detail",
+      "domId": "tab-journal",
+      "targetPageId": "page-journal",
+      "hideEdge": true,
+      "reason": "global nav"
+    },
+    {
+      "sourceNodeId": "page-trip-detail",
+      "domId": "back-trip-list",
+      "targetPageId": "page-trip-list",
+      "hideEdge": true,
+      "reason": "return"
+    },
+    {
+      "sourceNodeId": "page-trip-detail",
+      "domId": "shortcut-journal",
+      "targetPageId": "page-journal",
+      "hideEdge": true,
+      "reason": "secondary shortcut"
+    },
+    {
+      "sourceNodeId": "page-route-plan",
+      "domId": "tab-trip-list",
+      "targetPageId": "page-trip-list",
+      "hideEdge": true,
+      "reason": "global nav"
+    },
+    {
+      "sourceNodeId": "page-route-plan",
+      "domId": "tab-trip-detail",
+      "targetPageId": "page-trip-detail",
+      "hideEdge": true,
+      "reason": "global nav"
+    },
+    {
+      "sourceNodeId": "page-route-plan",
+      "domId": "tab-journal",
+      "targetPageId": "page-journal",
+      "hideEdge": true,
+      "reason": "global nav"
+    },
+    {
+      "sourceNodeId": "page-route-plan",
+      "domId": "back-trip-detail",
+      "targetPageId": "page-trip-detail",
+      "hideEdge": true,
+      "reason": "return"
+    },
+    {
+      "sourceNodeId": "page-journal",
+      "domId": "tab-trip-list",
+      "targetPageId": "page-trip-list",
+      "hideEdge": true,
+      "reason": "global nav"
+    },
+    {
+      "sourceNodeId": "page-journal",
+      "domId": "tab-trip-detail",
+      "targetPageId": "page-trip-detail",
+      "hideEdge": true,
+      "reason": "global nav"
+    },
+    {
+      "sourceNodeId": "page-journal",
+      "domId": "tab-route-plan",
+      "targetPageId": "page-route-plan",
+      "hideEdge": true,
+      "reason": "global nav"
+    },
+    {
+      "sourceNodeId": "page-journal",
+      "domId": "back-trip-detail",
+      "targetPageId": "page-trip-detail",
+      "hideEdge": true,
+      "reason": "return"
+    }
+  ]
+}

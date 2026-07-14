@@ -1,0 +1,80 @@
+:root {
+  --trippo-color-primary: #6fa7a2;
+  --trippo-color-primary-strong: #547f7b;
+  --trippo-color-primary-soft: #e5f1ef;
+  --trippo-color-primary-softer: #f1f7f6;
+
+  --trippo-state-success: #58a67c;
+  --trippo-state-warning: #e1aa5b;
+  --trippo-state-error: #d9786a;
+  --trippo-state-info: #7f9bb8;
+
+  --trippo-color-bg-page: #f7f5f1;
+  --trippo-color-bg-subtle: #f1eeea;
+  --trippo-color-bg-card: #fffdfc;
+  --trippo-color-bg-elevated: #ffffff;
+  --trippo-color-border: #e4ded7;
+  --trippo-color-border-strong: #d5cdc4;
+
+  --trippo-color-text-primary: #2f3533;
+  --trippo-color-text-secondary: #66706c;
+  --trippo-color-text-tertiary: #98a09b;
+  --trippo-color-text-on-primary: #ffffff;
+
+  --trippo-radius-sm: 4px;
+  --trippo-radius-md: 8px;
+  --trippo-radius-lg: 16px;
+  --trippo-radius-full: 9999px;
+
+  --trippo-shadow-static: 0 10px 24px rgba(47, 53, 51, 0.04);
+  --trippo-shadow-floating: 0 18px 48px rgba(47, 53, 51, 0.12);
+
+  --trippo-font-title: -apple-system, BlinkMacSystemFont, "SF Pro Display", "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  --trippo-font-body: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+
+  --trippo-text-xs: 11px;
+  --trippo-text-sm: 13px;
+  --trippo-text-md: 15px;
+  --trippo-text-lg: 18px;
+  --trippo-text-xl: 24px;
+
+  --trippo-space-1: 4px;
+  --trippo-space-2: 8px;
+  --trippo-space-3: 12px;
+  --trippo-space-4: 16px;
+  --trippo-space-5: 20px;
+  --trippo-space-6: 24px;
+  --trippo-space-8: 32px;
+}
+
+.trippo-title-xl {
+  font-family: var(--trippo-font-title);
+  font-size: var(--trippo-text-xl);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.04em;
+}
+
+.trippo-title-lg {
+  font-family: var(--trippo-font-title);
+  font-size: var(--trippo-text-lg);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.trippo-body {
+  font-family: var(--trippo-font-body);
+  font-size: var(--trippo-text-md);
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.trippo-caption {
+  font-family: var(--trippo-font-body);
+  font-size: var(--trippo-text-sm);
+  font-weight: 400;
+  line-height: 1.5;
+}

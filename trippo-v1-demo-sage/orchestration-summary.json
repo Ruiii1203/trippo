@@ -1,0 +1,28 @@
+{
+  "project": {
+    "name": "Trippo V1 鼠尾草配色 Demo",
+    "path": "/Users/bytedance/Desktop/VibeCoding/Trippo/trippo-v1-demo-sage",
+    "operation": "create",
+    "deviceType": "mobile",
+    "language": "zh-CN",
+    "styleDefinitionBrief": "Trippo V1 鼠尾草配色 demo，参考 Color Hunt 的浅鼠尾草绿、薄荷白、奶油白、淡黄奶油体系，整体更柔和、更安静，但仍保持移动端清晰度。",
+    "designRead": "旅行陪伴型移动产品 / 轻量 / 温柔 / 清楚 / 轻女性化但不过甜 / 低饱和移动端 UI",
+    "styleContinuityAnchors": {
+      "colorSystem": {
+        "primaryColorRole": "主色为加深后的鼠尾草绿，用于主按钮、选中态、关键数字与主要标签。",
+        "brandHuePolicy": "整体围绕 sage + cream 建立层次，淡黄奶油只作为暖意补充，不做第二品牌主色。",
+        "stateColors": "success warning error info 保持低饱和语义色，不与品牌色竞争。"
+      },
+      "surfaceAndDepth": "页面以奶油白为底，卡片更接近米白，弱阴影配轻边框；整体比上一版更柔和、更安静。",
+      "componentLanguage": "卡片减少冷感，增加纸面般轻柔层次；交互仍然简洁克制。",
+      "interactionTone": "像安静陪伴的旅行工具，而不是活泼社交产品。"
+    }
+  },
+  "designSource": {
+    "operatingMode": "free-explore",
+    "cssFilePath": "/Users/bytedance/Desktop/VibeCoding/Trippo/trippo-v1-demo-sage/colors_and_type.css",
+    "brandPrefix": "trippo",
+    "themeMode": "light",
+    "designDecisionSummary": "以 Color Hunt 提供的浅鼠尾草绿、薄荷白、奶油白、淡黄奶油为基础，重新收敛 Trippo V1 的移动端视觉语言，让产品更柔和、有空气感，同时保留路线与规划功能所需的清晰层级。"
+  }
+}

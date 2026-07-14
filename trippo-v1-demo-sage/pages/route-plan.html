@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html class="light" lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>路线</title>
+  <style id="theme-vars">
+    :root {
+      --trippo-color-primary: #98a881;
+      --trippo-color-primary-strong: #78885f;
+      --trippo-color-primary-soft: #d9dfc6;
+      --trippo-color-primary-softer: #eff3ea;
+
+      --trippo-state-success: #8aa06f;
+      --trippo-state-warning: #baa56b;
+      --trippo-state-error: #c98378;
+      --trippo-state-info: #9caebb;
+
+      --trippo-color-bg-page: #fffdf0;
+      --trippo-color-bg-subtle: #efe7c9;
+      --trippo-color-bg-card: #fffef8;
+      --trippo-color-bg-elevated: #ffffff;
+      --trippo-color-border: #e7e6d9;
+      --trippo-color-border-strong: #d7d8c8;
+
+      --trippo-color-text-primary: #3d4638;
+      --trippo-color-text-secondary: #697260;
+      --trippo-color-text-tertiary: #99a18f;
+      --trippo-color-text-on-primary: #ffffff;
+
+      --trippo-radius-sm: 4px;
+      --trippo-radius-md: 8px;
+      --trippo-radius-lg: 16px;
+      --trippo-radius-full: 9999px;
+
+      --trippo-shadow-static: 0 10px 24px rgba(61, 70, 56, 0.035);
+      --trippo-shadow-floating: 0 18px 48px rgba(61, 70, 56, 0.1);
+
+      --trippo-font-title: -apple-system, BlinkMacSystemFont, "SF Pro Display", "PingFang SC",
+        "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      --trippo-font-body: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC",
+        "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+
+      --trippo-text-xs: 11px;
+      --trippo-text-sm: 13px;
+      --trippo-text-md: 15px;
+      --trippo-text-lg: 18px;
+      --trippo-text-xl: 24px;
+
+      --trippo-space-1: 4px;
+      --trippo-space-2: 8px;
+      --trippo-space-3: 12px;
+      --trippo-space-4: 16px;
+      --trippo-space-5: 20px;
+      --trippo-space-6: 24px;
+      --trippo-space-8: 32px;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--trippo-color-bg-page);
+      color: var(--trippo-color-text-primary);
+      font-family: var(--trippo-font-body);
+    }
+  </style>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+  <section id="trippo-project-shell" data-shell="trippo-project-shell" class="trippo-shell trippo-body">
+    <style>
+      .trippo-shell {
+        position: relative;
+        min-height: 100vh;
+        background: var(--trippo-color-bg-page);
+        color: var(--trippo-color-text-primary);
+        font-family: var(--trippo-font-body);
+        font-size: var(--trippo-text-md);
+        line-height: 1.6;
+      }
+
+      .trippo-shell *,
+      .trippo-shell *::before,
+      .trippo-shell *::after {
+        box-sizing: border-box;
+      }
+
+      .trippo-shell button,
+      .trippo-shell a {
+        font: inherit;
+      }
+
+      .trippo-shell button {
+        border: 0;
+        cursor: pointer;
+        background: transparent;
+      }
+
+      .trippo-appbar,
+      .trippo-tabbar {
+        position: fixed;
+        left: 0;
+        right: 0;
+        z-index: 20;
+        margin: 0 auto;
+        width: min(100%, 480px);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+      }
+
+      .trippo-appbar {
+        top: 0;
+        padding: calc(env(safe-area-inset-top, 0px) + var(--trippo-space-2)) var(--trippo-space-4) var(--trippo-space-3);
+        background: color-mix(in srgb, var(--trippo-color-bg-card) 82%, transparent);
+        border-bottom: 1px solid color-mix(in srgb, var(--trippo-color-border) 78%, transparent);
+        box-shadow: var(--trippo-shadow-floating);
+      }
+
+      .trippo-appbar__row {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: var(--trippo-space-3);
+      }
+
+      .trippo-appbar__title {
+        margin: 0;
+        min-width: 0;
+        color: var(--trippo-color-text-primary);
+        font-family: var(--trippo-font-title);
+        font-size: var(--trippo-text-xl);
+        font-weight: 700;
+        line-height: 1.15;
+        letter-spacing: -0.04em;
+        text-wrap: balance;
+        word-break: keep-all;
+        overflow-wrap: break-word;
+      }
+
+      .trippo-appbar__badge {
+        display: inline-flex;
+        min-height: 28px;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        padding: 0 var(--trippo-space-3);
+        border-radius: var(--trippo-radius-lg);
+        background: var(--trippo-color-primary-softer);
+        color: var(--trippo-color-primary-strong);
+        font-size: var(--trippo-text-sm);
+        line-height: 1;
+        white-space: nowrap;
+      }
+
+      .trippo-shell__main {
+        display: block;
+        padding: calc(env(safe-area-inset-top, 0px) + 88px) var(--trippo-space-4) calc(env(safe-area-inset-bottom, 0px) + 104px);
+      }
+
+      .trippo-shell__content {
+        display: flex;
+        flex-direction: column;
+        gap: var(--trippo-space-5);
+        min-height: calc(100vh - 192px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+      }
+
+      .trippo-content-section {
+        display: flex;
+        flex-direction: column;
+        gap: var(--trippo-space-4);
+      }
+
+      .trippo-card {
+        display: flex;
+        flex-direction: column;
+        gap: var(--trippo-space-3);
+        padding: var(--trippo-space-5);
+        border: 1px solid var(--trippo-color-border);
+        border-radius: var(--trippo-radius-lg);
+        background: var(--trippo-color-bg-card);
+      }
+
+      .trippo-card--compact {
+        padding: var(--trippo-space-4);
+        border-radius: var(--trippo-radius-md);
+      }
+
+      .trippo-card__title {
+        margin: 0;
+        color: var(--trippo-color-text-primary);
+        font-family: var(--trippo-font-title);
+        font-size: var(--trippo-text-lg);
+        font-weight: 700;
+        line-height: 1.2;
+        letter-spacing: -0.02em;
+        text-wrap: balance;
+        word-break: keep-all;
+        overflow-wrap: break-word;
+      }
+
+      .trippo-card__body,
+      .trippo-body-muted {
+        margin: 0;
+        color: var(--trippo-color-text-secondary);
+        font-size: var(--trippo-text-md);
+        line-height: 1.6;
+      }
+
+      .trippo-caption-text {
+        margin: 0;
+        color: var(--trippo-color-text-tertiary);
+        font-size: var(--trippo-text-sm);
+        line-height: 1.5;
+      }
+
+      .trippo-chip-row,
+      .trippo-button-row,
+      .trippo-meta-row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: var(--trippo-space-2);
+      }
+
+      .trippo-chip {
+        display: inline-flex;
+        min-height: 24px;
+        align-items: center;
+        justify-content: center;
+        padding: 0 var(--trippo-space-3);
+        border-radius: var(--trippo-radius-md);
+        background: var(--trippo-color-primary-soft);
+        color: var(--trippo-color-primary-strong);
+        font-size: var(--trippo-text-sm);
+        line-height: 1;
+        white-space: nowrap;
+      }
+
+      .trippo-chip--neutral {
+        background: var(--trippo-color-bg-subtle);
+        color: var(--trippo-color-text-secondary);
+      }
+
+      .trippo-primary-btn,
+      .trippo-secondary-btn {
+        display: inline-flex;
+        min-height: 44px;
+        align-items: center;
+        justify-content: center;
+        gap: var(--trippo-space-2);
+        padding: 0 var(--trippo-space-5);
+        border-radius: var(--trippo-radius-md);
+        font-size: var(--trippo-text-md);
+        font-weight: 600;
+        line-height: 1;
+        text-decoration: none;
+        white-space: nowrap;
+        transition: background-color 140ms cubic-bezier(.2,.8,.2,1), color 140ms cubic-bezier(.2,.8,.2,1), border-color 140ms cubic-bezier(.2,.8,.2,1), transform 140ms cubic-bezier(.2,.8,.2,1);
+      }
+
+      .trippo-primary-btn {
+        background: var(--trippo-color-primary);
+        color: var(--trippo-color-text-on-primary);
+      }
+
+      .trippo-secondary-btn {
+        border: 1px solid var(--trippo-color-border);
+        background: var(--trippo-color-bg-card);
+        color: var(--trippo-color-text-primary);
+      }
+
+      .trippo-primary-btn:focus-visible,
+      .trippo-secondary-btn:focus-visible,
+      .trippo-tabbar__item:focus-visible {
+        outline: 2px solid var(--trippo-color-primary-strong);
+        outline-offset: 2px;
+      }
+
+      .trippo-primary-btn:active,
+      .trippo-secondary-btn:active,
+      .trippo-tabbar__item:active {
+        transform: translateY(0);
+      }
+
+      .trippo-primary-btn:disabled,
+      .trippo-secondary-btn:disabled {
+        opacity: 0.55;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      .trippo-list {
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        border-top: 1px solid var(--trippo-color-border);
+      }
+
+      .trippo-list__row {
+        display: flex;
+        min-height: 56px;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--trippo-space-4);
+        padding: var(--trippo-space-4) 0;
+        border-bottom: 1px solid var(--trippo-color-border);
+      }
+
+      .trippo-list__main {
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        align-items: flex-start;
+      }
+
+      .trippo-list__title {
+        margin: 0;
+        color: var(--trippo-color-text-primary);
+        font-size: var(--trippo-text-md);
+        font-weight: 600;
+        line-height: 1.4;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .trippo-list__meta {
+        margin: 0;
+        color: var(--trippo-color-text-secondary);
+        font-size: var(--trippo-text-sm);
+        line-height: 1.5;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .trippo-tabbar {
+        bottom: 0;
+        padding: var(--trippo-space-2) var(--trippo-space-4) calc(env(safe-area-inset-bottom, 0px) + var(--trippo-space-2));
+        background: color-mix(in srgb, var(--trippo-color-bg-card) 88%, transparent);
+        border-top: 1px solid color-mix(in srgb, var(--trippo-color-border) 82%, transparent);
+        box-shadow: var(--trippo-shadow-floating);
+      }
+
+      .trippo-tabbar__rail {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: var(--trippo-space-2);
+        align-items: center;
+      }
+
+      .trippo-tabbar__item {
+        display: inline-flex;
+        min-height: 56px;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        padding: var(--trippo-space-2);
+        border-radius: var(--trippo-radius-md);
+        color: var(--trippo-color-text-secondary);
+        white-space: nowrap;
+        transition: background-color 140ms cubic-bezier(.2,.8,.2,1), color 140ms cubic-bezier(.2,.8,.2,1), transform 140ms cubic-bezier(.2,.8,.2,1);
+      }
+
+      .trippo-tabbar__icon {
+        width: 18px;
+        height: 18px;
+        stroke-width: 1.75;
+        transition: transform 140ms cubic-bezier(.2,.8,.2,1);
+      }
+
+      .trippo-tabbar__label {
+        font-size: var(--trippo-text-sm);
+        line-height: 1;
+        white-space: nowrap;
+      }
+
+      .trippo-tabbar[data-active-tab="trip-list"] [data-tab-key="trip-list"],
+      .trippo-tabbar[data-active-tab="trip-detail"] [data-tab-key="trip-detail"],
+      .trippo-tabbar[data-active-tab="route-plan"] [data-tab-key="route-plan"],
+      .trippo-tabbar[data-active-tab="journal"] [data-tab-key="journal"] {
+        background: var(--trippo-color-primary-soft);
+        color: var(--trippo-color-primary-strong);
+      }
+
+      .trippo-tabbar[data-active-tab="trip-list"] [data-tab-key="trip-list"] .trippo-tabbar__icon,
+      .trippo-tabbar[data-active-tab="trip-detail"] [data-tab-key="trip-detail"] .trippo-tabbar__icon,
+      .trippo-tabbar[data-active-tab="route-plan"] [data-tab-key="route-plan"] .trippo-tabbar__icon,
+      .trippo-tabbar[data-active-tab="journal"] [data-tab-key="journal"] .trippo-tabbar__icon {
+        transform: translateY(-1px);
+      }
+
+      @media (hover: hover) and (pointer: fine) {
+        .trippo-primary-btn:hover,
+        .trippo-secondary-btn:hover {
+          transform: translateY(-1px);
+        }
+
+        .trippo-primary-btn:hover {
+          background: var(--trippo-color-primary-strong);
+        }
+
+        .trippo-secondary-btn:hover {
+          background: var(--trippo-color-bg-subtle);
+        }
+
+        .trippo-tabbar__item:hover {
+          background: var(--trippo-color-primary-softer);
+          color: var(--trippo-color-primary-strong);
+        }
+
+        .trippo-tabbar__item:hover .trippo-tabbar__icon {
+          transform: translateY(-1px);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .trippo-shell *,
+        .trippo-shell *::before,
+        .trippo-shell *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+          scroll-behavior: auto !important;
+        }
+      }
+    </style>
+
+    <header class="trippo-appbar" aria-label="Trippo 顶部栏">
+      <div class="trippo-appbar__row">
+        <!-- SLOT: pageTitle -->
+        <h1 class="trippo-appbar__title" data-slot="pageTitle">路线</h1>
+        <span class="trippo-appbar__badge" aria-label="品牌标识">旅啵</span>
+      </div>
+    </header>
+
+    <main class="trippo-shell__main" aria-label="Trippo 页面主体">
+      <div class="trippo-shell__content">
+        <style>
+          .trippo-route-sticky {
+            position: sticky;
+            top: calc(env(safe-area-inset-top, 0px) + 76px);
+            z-index: 5;
+            display: flex;
+            flex-direction: column;
+            gap: var(--trippo-space-3);
+            padding-bottom: var(--trippo-space-2);
+            background: color-mix(in srgb, var(--trippo-color-bg-page) 92%, transparent);
+          }
+
+          .trippo-route-sticky__row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--trippo-space-3);
+          }
+
+          .trippo-route-back {
+            min-height: 40px;
+            padding: 0 var(--trippo-space-4) 0 var(--trippo-space-3);
+            gap: 6px;
+            flex-shrink: 0;
+          }
+
+          .trippo-route-back__icon,
+          .trippo-route-reminder__icon,
+          .trippo-route-footer__icon {
+            width: 16px;
+            height: 16px;
+            stroke-width: 1.75;
+            flex-shrink: 0;
+          }
+
+          .trippo-route-day-note {
+            margin: 0;
+            min-width: 0;
+            color: var(--trippo-color-text-secondary);
+            font-size: var(--trippo-text-sm);
+            line-height: 1.5;
+            text-align: right;
+          }
+
+          .trippo-route-day-switcher {
+            display: flex;
+            gap: var(--trippo-space-2);
+            overflow-x: auto;
+            padding-bottom: 2px;
+            scrollbar-width: none;
+          }
+
+          .trippo-route-day-switcher::-webkit-scrollbar {
+            display: none;
+          }
+
+          .trippo-route-day {
+            display: inline-flex;
+            min-width: 76px;
+            min-height: 68px;
+            flex-shrink: 0;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            padding: var(--trippo-space-3) var(--trippo-space-4);
+            border: 1px solid var(--trippo-color-border);
+            border-radius: var(--trippo-radius-md);
+            background: var(--trippo-color-bg-card);
+            color: var(--trippo-color-text-secondary);
+            transition: background-color 140ms cubic-bezier(.2,.8,.2,1), color 140ms cubic-bezier(.2,.8,.2,1), border-color 140ms cubic-bezier(.2,.8,.2,1), transform 140ms cubic-bezier(.2,.8,.2,1);
+          }
+
+          .trippo-route-day__week {
+            font-size: var(--trippo-text-sm);
+            line-height: 1;
+            white-space: nowrap;
+          }
+
+          .trippo-route-day__date {
+            font-variant-numeric: tabular-nums;
+            font-size: var(--trippo-text-md);
+            font-weight: 600;
+            line-height: 1;
+            white-space: nowrap;
+          }
+
+          .trippo-route-day[data-active="true"] {
+            border-color: var(--trippo-color-primary-soft);
+            background: var(--trippo-color-primary-softer);
+            color: var(--trippo-color-primary-strong);
+          }
+
+          .trippo-route-heading {
+            margin: 0;
+            color: var(--trippo-color-text-primary);
+            font-family: var(--trippo-font-title);
+            font-size: var(--trippo-text-lg);
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            text-wrap: balance;
+            word-break: keep-all;
+          }
+
+          .trippo-route-intro {
+            margin: 0;
+            color: var(--trippo-color-text-secondary);
+            font-size: var(--trippo-text-md);
+            line-height: 1.6;
+          }
+
+          .trippo-route-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--trippo-space-3);
+            margin: 0;
+            padding: 0;
+            list-style: none;
+          }
+
+          .trippo-route-stop {
+            position: relative;
+            gap: var(--trippo-space-4);
+          }
+
+          .trippo-route-stop__header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: var(--trippo-space-3);
+          }
+
+          .trippo-route-stop__summary {
+            display: flex;
+            min-width: 0;
+            align-items: flex-start;
+            gap: var(--trippo-space-3);
+          }
+
+          .trippo-route-stop__index {
+            display: inline-flex;
+            width: 40px;
+            min-width: 40px;
+            height: 40px;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--trippo-radius-md);
+            background: var(--trippo-color-primary-softer);
+            color: var(--trippo-color-primary-strong);
+            font-size: var(--trippo-text-md);
+            font-weight: 700;
+            line-height: 1;
+            font-variant-numeric: tabular-nums;
+          }
+
+          .trippo-route-stop__time-group {
+            display: flex;
+            min-width: 0;
+            flex-direction: column;
+            gap: 4px;
+          }
+
+          .trippo-route-stop__time {
+            margin: 0;
+            color: var(--trippo-color-text-primary);
+            font-size: var(--trippo-text-md);
+            font-weight: 600;
+            line-height: 1.4;
+            font-variant-numeric: tabular-nums;
+            white-space: nowrap;
+          }
+
+          .trippo-route-stop__window {
+            margin: 0;
+            color: var(--trippo-color-text-tertiary);
+            font-size: var(--trippo-text-sm);
+            line-height: 1.5;
+          }
+
+          .trippo-route-stop__status {
+            display: inline-flex;
+            min-height: 24px;
+            align-items: center;
+            justify-content: center;
+            padding: 0 var(--trippo-space-3);
+            border-radius: var(--trippo-radius-md);
+            background: var(--trippo-color-bg-subtle);
+            color: var(--trippo-color-text-secondary);
+            font-size: var(--trippo-text-sm);
+            line-height: 1;
+            white-space: nowrap;
+          }
+
+          .trippo-route-stop__status[data-state="done"] {
+            background: color-mix(in srgb, var(--trippo-state-success) 12%, var(--trippo-color-bg-card));
+            color: var(--trippo-state-success);
+          }
+
+          .trippo-route-stop__title-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: var(--trippo-space-2);
+          }
+
+          .trippo-route-reminder {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--trippo-space-2);
+            padding-top: var(--trippo-space-3);
+            border-top: 1px solid var(--trippo-color-border);
+            color: var(--trippo-color-text-secondary);
+          }
+
+          .trippo-route-reminder .trippo-caption-text {
+            min-width: 0;
+            color: var(--trippo-color-text-secondary);
+          }
+
+          .trippo-route-stop__footer {
+            display: flex;
+            flex-direction: column;
+            gap: var(--trippo-space-2);
+          }
+
+          .trippo-route-stop__pace {
+            margin: 0;
+            color: var(--trippo-color-text-tertiary);
+            font-size: var(--trippo-text-sm);
+            line-height: 1.5;
+          }
+
+          .trippo-route-stop__action-row {
+            display: flex;
+            justify-content: flex-end;
+          }
+
+          .trippo-route-status-btn {
+            display: inline-flex;
+            min-height: 40px;
+            align-items: center;
+            justify-content: center;
+            padding: 0 var(--trippo-space-4);
+            border: 1px solid var(--trippo-color-border);
+            border-radius: var(--trippo-radius-md);
+            background: var(--trippo-color-bg-card);
+            color: var(--trippo-color-text-primary);
+            font-size: var(--trippo-text-sm);
+            font-weight: 600;
+            line-height: 1;
+            white-space: nowrap;
+            transition: background-color 140ms cubic-bezier(.2,.8,.2,1), color 140ms cubic-bezier(.2,.8,.2,1), border-color 140ms cubic-bezier(.2,.8,.2,1), transform 140ms cubic-bezier(.2,.8,.2,1);
+          }
+
+          .trippo-route-status-btn[data-state="ready"] {
+            border-color: var(--trippo-color-primary-soft);
+            background: var(--trippo-color-primary-softer);
+            color: var(--trippo-color-primary-strong);
+          }
+
+          .trippo-route-status-btn[data-state="done"] {
+            border-color: color-mix(in srgb, var(--trippo-state-success) 24%, var(--trippo-color-border));
+            background: color-mix(in srgb, var(--trippo-state-success) 12%, var(--trippo-color-bg-card));
+            color: var(--trippo-state-success);
+            cursor: not-allowed;
+          }
+
+          .trippo-route-status-btn:focus-visible,
+          .trippo-route-day:focus-visible {
+            outline: 2px solid var(--trippo-color-primary-strong);
+            outline-offset: 2px;
+          }
+
+          .trippo-route-status-btn:active,
+          .trippo-route-day:active {
+            transform: translateY(0);
+          }
+
+          .trippo-route-footer {
+            gap: var(--trippo-space-4);
+            margin-top: auto;
+          }
+
+          .trippo-route-footer__copy {
+            display: flex;
+            flex-direction: column;
+            gap: var(--trippo-space-2);
+          }
+
+          .trippo-route-footer__cta {
+            width: 100%;
+          }
+
+          .trippo-route-footer__cta .trippo-route-footer__icon {
+            transition: transform 140ms cubic-bezier(.2,.8,.2,1);
+          }
+
+          @media (hover: hover) and (pointer: fine) {
+            .trippo-route-day:hover {
+              background: var(--trippo-color-bg-subtle);
+              color: var(--trippo-color-text-primary);
+              transform: translateY(-1px);
+            }
+
+            .trippo-route-day[data-active="true"]:hover {
+              background: var(--trippo-color-primary-soft);
+              color: var(--trippo-color-primary-strong);
+            }
+
+            .trippo-route-status-btn[data-state="ready"]:hover {
+              background: var(--trippo-color-primary-soft);
+              border-color: var(--trippo-color-primary-soft);
+              transform: translateY(-1px);
+            }
+
+            .trippo-route-footer__cta:hover .trippo-route-footer__icon {
+              transform: translateX(2px);
+            }
+          }
+
+          @media (min-width: 768px) {
+            .trippo-shell__main {
+              padding-left: 24px;
+              padding-right: 24px;
+            }
+
+            .trippo-route-footer__cta {
+              width: auto;
+              align-self: flex-start;
+            }
+          }
+        </style>
+
+        <section class="trippo-content-section" aria-label="日期切换">
+          <div class="trippo-route-sticky">
+            <div class="trippo-route-sticky__row">
+              <a href="trip-detail.html" class="trippo-secondary-btn trippo-route-back" data-dom-id="back-trip-detail" aria-label="返回行程详情">
+                <i data-lucide="chevron-left" class="trippo-route-back__icon" aria-hidden="true"></i>
+                <span>返回</span>
+              </a>
+              <p class="trippo-route-day-note">今日 3 站，上午紧凑，午后留出慢拍时间。</p>
+            </div>
+            <div class="trippo-route-day-switcher" role="tablist" aria-label="每日路线切换">
+              <button type="button" class="trippo-route-day" role="tab" aria-selected="false">
+                <span class="trippo-route-day__week">周四</span>
+                <span class="trippo-route-day__date">04/17</span>
+              </button>
+              <button type="button" class="trippo-route-day" role="tab" aria-selected="true" data-active="true">
+                <span class="trippo-route-day__week">周五</span>
+                <span class="trippo-route-day__date">04/18</span>
+              </button>
+              <button type="button" class="trippo-route-day" role="tab" aria-selected="false">
+                <span class="trippo-route-day__week">周六</span>
+                <span class="trippo-route-day__date">04/19</span>
+              </button>
+              <button type="button" class="trippo-route-day" role="tab" aria-selected="false">
+                <span class="trippo-route-day__week">周日</span>
+                <span class="trippo-route-day__date">04/20</span>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <section class="trippo-content-section" aria-labelledby="route-today-title">
+          <div class="trippo-content-section">
+            <h2 id="route-today-title" class="trippo-route-heading">今日路线</h2>
+            <p class="trippo-route-intro">先完成寺院打卡和沿河散步，下午把高空视角留给晴空塔，顺序一眼就能照着走。</p>
+          </div>
+
+          <ol class="trippo-route-list" aria-label="今日路线清单">
+            <li class="trippo-card trippo-route-stop" aria-label="第一站 浅草寺">
+              <div class="trippo-route-stop__header">
+                <div class="trippo-route-stop__summary">
+                  <span class="trippo-route-stop__index" aria-hidden="true">01</span>
+                  <div class="trippo-route-stop__time-group">
+                    <p class="trippo-route-stop__time">08:30 - 09:40</p>
+                    <p class="trippo-route-stop__window">酒店出发后的第一站</p>
+                  </div>
+                </div>
+                <span class="trippo-route-stop__status" data-state="done">已完成</span>
+              </div>
+
+              <div class="trippo-route-stop__title-wrap">
+                <h3 class="trippo-card__title">浅草寺</h3>
+                <p class="trippo-card__body">先在雷门口拍入口照，再顺时针绕到本堂，最后补一张仲见世街的开场镜头。</p>
+              </div>
+
+              <div class="trippo-route-reminder" aria-label="提醒">
+                <i data-lucide="bell-ring" class="trippo-route-reminder__icon" aria-hidden="true"></i>
+                <p class="trippo-caption-text">提醒：9 点前游客更少，御守窗口平均排队 10 分钟左右。</p>
+              </div>
+
+              <div class="trippo-route-stop__footer">
+                <p class="trippo-route-stop__pace">停留 70 分钟，已预留 12 分钟步行时间。</p>
+                <div class="trippo-route-stop__action-row">
+                  <button type="button" class="trippo-route-status-btn" data-state="done" disabled aria-label="已打卡">已打卡</button>
+                </div>
+              </div>
+            </li>
+
+            <li class="trippo-card trippo-route-stop" aria-label="第二站 隅田公园">
+              <div class="trippo-route-stop__header">
+                <div class="trippo-route-stop__summary">
+                  <span class="trippo-route-stop__index" aria-hidden="true">02</span>
+                  <div class="trippo-route-stop__time-group">
+                    <p class="trippo-route-stop__time">10:10 - 11:20</p>
+                    <p class="trippo-route-stop__window">寺院结束后慢走过去</p>
+                  </div>
+                </div>
+                <span class="trippo-route-stop__status">待打卡</span>
+              </div>
+
+              <div class="trippo-route-stop__title-wrap">
+                <h3 class="trippo-card__title">隅田公园</h3>
+                <p class="trippo-card__body">沿河一侧慢走，优先拍樱花步道和晴空塔同框，再挑一处长椅休息补水。</p>
+              </div>
+
+              <div class="trippo-route-reminder" aria-label="提醒">
+                <i data-lucide="bell-ring" class="trippo-route-reminder__icon" aria-hidden="true"></i>
+                <p class="trippo-caption-text">提醒：河边风大，外套别放在相机包最底层，补水点在东侧入口附近。</p>
+              </div>
+
+              <div class="trippo-route-stop__footer">
+                <p class="trippo-route-stop__pace">停留 70 分钟，中间留出 15 分钟拍照回看。</p>
+                <div class="trippo-route-stop__action-row">
+                  <button type="button" class="trippo-route-status-btn" data-state="ready" aria-label="去打卡">去打卡</button>
+                </div>
+              </div>
+            </li>
+
+            <li class="trippo-card trippo-route-stop" aria-label="第三站 东京晴空塔">
+              <div class="trippo-route-stop__header">
+                <div class="trippo-route-stop__summary">
+                  <span class="trippo-route-stop__index" aria-hidden="true">03</span>
+                  <div class="trippo-route-stop__time-group">
+                    <p class="trippo-route-stop__time">14:00 - 16:30</p>
+                    <p class="trippo-route-stop__window">午饭后再上塔更从容</p>
+                  </div>
+                </div>
+                <span class="trippo-route-stop__status">待打卡</span>
+              </div>
+
+              <div class="trippo-route-stop__title-wrap">
+                <h3 class="trippo-card__title">东京晴空塔</h3>
+                <p class="trippo-card__body">先去展望台看白天视野，再留 20 分钟给纪念品区，结束前补一张电梯口合照。</p>
+              </div>
+
+              <div class="trippo-route-reminder" aria-label="提醒">
+                <i data-lucide="bell-ring" class="trippo-route-reminder__icon" aria-hidden="true"></i>
+                <p class="trippo-caption-text">提醒：电子票提前 10 分钟打开，观景层信号弱，合照先在入场前发给同伴。</p>
+              </div>
+
+              <div class="trippo-route-stop__footer">
+                <p class="trippo-route-stop__pace">停留 150 分钟，预留 20 分钟电梯和入场缓冲。</p>
+                <div class="trippo-route-stop__action-row">
+                  <button type="button" class="trippo-route-status-btn" data-state="ready" aria-label="去打卡">去打卡</button>
+                </div>
+              </div>
+            </li>
+          </ol>
+        </section>
+
+        <footer class="trippo-card trippo-route-footer" aria-labelledby="route-footer-title">
+          <div class="trippo-route-footer__copy">
+            <h2 id="route-footer-title" class="trippo-route-heading">整理手账</h2>
+            <p class="trippo-card__body">路线顺序已经对齐，下一步把今天拍到的照片、票据和一句心情顺手收进手账。</p>
+          </div>
+          <a href="journal.html" class="trippo-primary-btn trippo-route-footer__cta" data-dom-id="cta-journal" aria-label="整理手账">
+            <span>整理手账</span>
+            <i data-lucide="arrow-right" class="trippo-route-footer__icon" aria-hidden="true"></i>
+          </a>
+        </footer>
+      </div>
+    </main>
+
+    <!-- SLOT: activeTab | 仅替换 nav[data-active-tab] 的值 -->
+    <nav class="trippo-tabbar" data-slot="activeTab" data-active-tab="route-plan" aria-label="Trippo 底部导航">
+      <div class="trippo-tabbar__rail">
+        <button type="button" class="trippo-tabbar__item" data-tab-key="trip-list" data-dom-id="tab-trip-list" aria-label="行程">
+          <i data-lucide="map" class="trippo-tabbar__icon" aria-hidden="true"></i>
+          <span class="trippo-tabbar__label">行程</span>
+        </button>
+        <button type="button" class="trippo-tabbar__item" data-tab-key="trip-detail" data-dom-id="tab-trip-detail" aria-label="详情">
+          <i data-lucide="compass" class="trippo-tabbar__icon" aria-hidden="true"></i>
+          <span class="trippo-tabbar__label">详情</span>
+        </button>
+        <button type="button" class="trippo-tabbar__item" data-tab-key="route-plan" data-dom-id="tab-route-plan" aria-label="路线">
+          <i data-lucide="route" class="trippo-tabbar__icon" aria-hidden="true"></i>
+          <span class="trippo-tabbar__label">路线</span>
+        </button>
+        <button type="button" class="trippo-tabbar__item" data-tab-key="journal" data-dom-id="tab-journal" aria-label="手账">
+          <i data-lucide="book-open" class="trippo-tabbar__icon" aria-hidden="true"></i>
+          <span class="trippo-tabbar__label">手账</span>
+        </button>
+      </div>
+    </nav>
+  </section>
+  <script>
+    if (window.lucide) {
+      window.lucide.createIcons();
+    }
+  </script>
+</body>
+</html>
