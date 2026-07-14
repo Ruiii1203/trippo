@@ -4,18 +4,9 @@ import { Globe, NotebookPen } from 'lucide-react'
 import { useTripStore } from '../../stores/useTripStore'
 import { useJournalStore } from '../../stores/useJournalStore'
 import JournalCard from '../../components/JournalCard'
-import type { Journal } from '../../types'
+import type { Journal, Trip } from '../../types'
 
-function formatDate(dateStr: string): string {
-  const date = new Date(dateStr)
-  const month = date.getMonth() + 1
-  const day = date.getDate()
-  const hour = date.getHours().toString().padStart(2, '0')
-  const minute = date.getMinutes().toString().padStart(2, '0')
-  return `${month}月${day}日 ${hour}:${minute}`
-}
-
-function ActionSheet({ journal, tripName, onClose, onRename, onDuplicate, onDelete }: { journal: Journal; tripName: string; onClose: () => void; onRename: (journal: Journal) => void; onDuplicate: (journal: Journal) => void; onDelete: (journal: Journal) => void }) {
+function ActionSheet({ journal, tripName, onClose, onRename, onDuplicate, onDelete }: { journal: Journal & { tripName?: string }; tripName: string; onClose: () => void; onRename: (journal: Journal) => void; onDuplicate: (journal: Journal) => void; onDelete: (journal: Journal) => void }) {
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose()
@@ -63,9 +54,9 @@ function ActionSheet({ journal, tripName, onClose, onRename, onDuplicate, onDele
 function GlobalJournalListPage() {
   const navigate = useNavigate()
   const { loaded: tripLoaded, loadTrips, trips } = useTripStore()
-  const { loaded: journalLoaded, loadJournals, getJournalsByTrip, deleteJournal, addJournal, journals } = useJournalStore()
+  const { loaded: journalLoaded, loadJournals, deleteJournal, addJournal, journals } = useJournalStore()
 
-  const [selectedJournal, setSelectedJournal] = useState<Journal | null>(null)
+  const [selectedJournal, setSelectedJournal] = useState<(Journal & { tripName?: string }) | null>(null)
   const [showActionSheet, setShowActionSheet] = useState(false)
 
   useEffect(() => {
@@ -91,7 +82,7 @@ function GlobalJournalListPage() {
 
   const orphanJournals = publishedJournals.filter((j) => !j.tripId)
 
-  const handleMenuClick = (e: React.MouseEvent, journal: Journal) => {
+  const handleMenuClick = (e: React.MouseEvent, journal: Journal & { tripName?: string }) => {
     e.preventDefault()
     e.stopPropagation()
     setSelectedJournal(journal)
@@ -181,7 +172,7 @@ function GlobalJournalListPage() {
         {groupedJournals.map(({ trip, journals }) => (
           <div key={trip.id} className="journal-section">
             <div className="section-header">
-              <h2 className="section-title">{trip.name}</h2>
+              <h2 className="section-title">{trip.title}</h2>
               <span className="section-count">{journals.length}</span>
             </div>
             <div className="journal-list">

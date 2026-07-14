@@ -64,7 +64,7 @@ function ListDetailPage() {
     const pendingItems = list.items.filter((item) => item.status === 'pending' || item.status === 'planned')
     if (pendingItems.length === 0) return
 
-    const destinations = [...new Set(pendingItems.map((item) => item.destination).filter(Boolean))]
+    const destinations = [...new Set(pendingItems.map((item) => item.destination).filter(Boolean))] as string[]
     const destination = destinations.length > 0 ? destinations[0] : '未指定'
 
     const newTrip = addTrip({

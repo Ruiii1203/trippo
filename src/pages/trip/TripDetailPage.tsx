@@ -39,7 +39,7 @@ function formatDateShort(dateStr: string): string {
   return `${date.getMonth() + 1}/${date.getDate()}`
 }
 
-function getSpotName(spotId: string, spots: Trip['spots']): string {
+function getSpotName(spotId: string, spots: typeof spots[0][]): string {
   return spots.find((s) => s.id === spotId)?.name || '未知景点'
 }
 

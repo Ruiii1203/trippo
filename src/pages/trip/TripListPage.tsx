@@ -9,6 +9,15 @@ import TripCard from '../../components/TripCard'
 import BottomSheet from '../../components/BottomSheet'
 import type { Trip } from '../../types'
 
+function formatDateRange(start: string, end: string): string {
+  const startDate = new Date(start)
+  const endDate = new Date(end)
+  const startStr = `${startDate.getFullYear()}年${startDate.getMonth() + 1}月${startDate.getDate()}日`
+  const endStr = `${endDate.getMonth() + 1}月${endDate.getDate()}日`
+  const days = Math.ceil((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24)) + 1
+  return `${startStr} - ${endStr} · ${days}天`
+}
+
 function TripSection({ title, trips, count, onMenuClick, getMetrics, getCoverImage }: { title: string; trips: Trip[]; count: number; onMenuClick: (e: React.MouseEvent, trip: Trip) => void; getMetrics: (tripId: string) => { wishlistCount: number; checkInCount: number; journalCount: number }; getCoverImage: (trip: Trip) => string | undefined }) {
   return (
     <div className="trip-section">

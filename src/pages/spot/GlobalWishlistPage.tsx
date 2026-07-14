@@ -211,7 +211,7 @@ function GlobalWishlistPage() {
   }, [activeCategory, searchQuery])
 
   const allWishlistedSpots = trips.flatMap((trip) =>
-    getWishlistedSpots(trip.id).map((spot) => ({ ...spot, tripId: trip.id, tripName: trip.name }))
+    getWishlistedSpots(trip.id).map((spot) => ({ ...spot, tripId: trip.id, tripName: trip.title }))
   )
 
   const filteredSpots = allWishlistedSpots.filter((spot) => {
@@ -482,10 +482,10 @@ function GlobalWishlistPage() {
               <button
                 key={trip.id}
                 className={`trip-selector-item ${addingSpot?.tripId === trip.id ? 'selected' : ''}`}
-                onClick={() => handleSelectTrip(trip.id, trip.name)}
+                onClick={() => handleSelectTrip(trip.id, trip.title)}
               >
                 <div className="trip-selector-info">
-                  <div className="trip-selector-name">{trip.name}</div>
+                  <div className="trip-selector-name">{trip.title}</div>
                   <div className="trip-selector-date">{trip.startDate} - {trip.endDate}</div>
                 </div>
                 {addingSpot?.tripId === trip.id && (
@@ -519,7 +519,7 @@ function GlobalWishlistPage() {
                   disabled={isAIPlanning}
                 >
                   <div className="trip-selector-info">
-                    <div className="trip-selector-name">{trip.name}</div>
+                    <div className="trip-selector-name">{trip.title}</div>
                     <div className="trip-selector-date">{trip.startDate} - {trip.endDate}</div>
                   </div>
                   <div className="trip-selector-count">

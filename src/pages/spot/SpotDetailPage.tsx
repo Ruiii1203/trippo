@@ -45,9 +45,9 @@ interface ExtendedSpot extends Spot {
 }
 
 function SpotDetailPage() {
-  const { spotId, tripId } = useParams<{ spotId: string; tripId?: string }>()
+  const { spotId } = useParams<{ spotId: string; tripId?: string }>()
   const navigate = useNavigate()
-  const { spots, getSpotsByTrip } = useSpotStore()
+  const { spots } = useSpotStore()
   const { trips } = useTripStore()
 
   const spot = spots.find((s) => s.id === spotId) as ExtendedSpot | undefined

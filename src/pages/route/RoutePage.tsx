@@ -93,7 +93,6 @@ function RoutePage() {
 
   const draft = tripId ? aiRouteDrafts.find((d) => d.tripId === tripId) : undefined
   const isDraft = draft?.status === 'draft'
-  const hasAnyScheduled = tripId ? getSpotsByDay(tripId, activeDay).length > 0 : false
 
   function handleConfirmDraft() {
     if (!tripId || !isDraft) return

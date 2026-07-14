@@ -34,7 +34,6 @@ function JournalEditorPage() {
   const [saved, setSaved] = useState(false)
   const [showTemplatePicker, setShowTemplatePicker] = useState(false)
   const [showInsertSheet, setShowInsertSheet] = useState(false)
-  const [showTripSelector, setShowTripSelector] = useState(false)
 
   useEffect(() => {
     if (!journalLoaded) loadJournals()
@@ -299,7 +298,7 @@ function JournalEditorPage() {
           <div className="journal-editor-meta card">
             <div className="meta-item">
               <span className="meta-label">行程</span>
-              <span className="meta-value">{trip.name}</span>
+              <span className="meta-value">{trip.title}</span>
             </div>
             <div className="meta-item">
               <span className="meta-label">状态</span>

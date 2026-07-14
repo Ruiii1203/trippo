@@ -109,7 +109,7 @@ function JournalDetailPage() {
           <div className="journal-detail-header">
             <h1 className="journal-title-lg">{journal.title}</h1>
             <div className="journal-detail-meta">
-              {trip && <span className="journal-detail-trip">{trip.name}</span>}
+              {trip && <span className="journal-detail-trip">{trip.title}</span>}
               <span className="journal-detail-date">{formatDate(journal.createdAt)}</span>
             </div>
           </div>
