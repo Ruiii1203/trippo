@@ -6,6 +6,7 @@ import { useSpotStore } from '../../stores/useSpotStore'
 import { useCheckInStore } from '../../stores/useCheckInStore'
 import { useJournalStore } from '../../stores/useJournalStore'
 import TripMapPreview from '../../components/TripMapPreview'
+import { getDestinationImage } from '../../utils/destinationImage'
 import type { Trip, CheckIn } from '../../types'
 
 const gradientPalettes = [
@@ -119,7 +120,7 @@ function TripDetailPage() {
     if (trip?.coverImage) return trip.coverImage
     const firstSpot = spots.find((s) => s.coverImage)
     if (firstSpot?.coverImage) return firstSpot.coverImage
-    return undefined
+    return trip ? getDestinationImage(trip.destination) : undefined
   }
 
   const heroImage = getHeroImage()

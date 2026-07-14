@@ -7,6 +7,7 @@ import { useCheckInStore } from '../../stores/useCheckInStore'
 import { useJournalStore } from '../../stores/useJournalStore'
 import TripCard from '../../components/TripCard'
 import BottomSheet from '../../components/BottomSheet'
+import { getDestinationImage } from '../../utils/destinationImage'
 import type { Trip } from '../../types'
 
 function formatDateRange(start: string, end: string): string {
@@ -189,7 +190,7 @@ function TripListPage() {
     const spots = getSpotsByTrip(trip.id)
     const firstSpot = spots.find((s) => s.coverImage)
     if (firstSpot?.coverImage) return firstSpot.coverImage
-    return undefined
+    return getDestinationImage(trip.destination)
   }
 
   const filteredTrips = trips.filter((t) => {
