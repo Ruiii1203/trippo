@@ -170,17 +170,23 @@ export async function generateAIRoute(
     }
 
     const jsonStr = extractJSON(content)
+    console.log('[AI Planner] Extracted JSON:', jsonStr)
     let result: AIPlannerResponse
 
     try {
       result = JSON.parse(jsonStr)
-    } catch {
+    } catch (e) {
+      console.error('[AI Planner] JSON parse error:', e)
       throw new Error('AI 返回格式异常，请重新生成')
     }
+
+    console.log('[AI Planner] Parsed result:', JSON.stringify(result))
 
     if (!result.days || !Array.isArray(result.days) || result.days.length === 0) {
       throw new Error('这次没有生成可用路线，请换一批心愿试试')
     }
+
+    console.log('[AI Planner] Days count:', result.days.length)
 
     const validSpotIds = new Set(spots.map((s) => s.id))
     result.days = result.days

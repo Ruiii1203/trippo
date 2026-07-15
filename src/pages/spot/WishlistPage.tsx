@@ -55,15 +55,20 @@ function WishlistPage() {
     setIsAIPlanning(true)
     try {
       const totalDays = getTotalDays(trip.startDate, trip.endDate)
+      console.log('[Wishlist] Starting AI plan', { tripId, totalDays, wishlistedCount: wishlistedSpots.length })
       const result = await generateAIRoute(trip, wishlistedSpots, totalDays)
+      console.log('[Wishlist] AI plan succeeded', { daysCount: result.days.length })
       applyAIRoute(tripId, result.days)
+      console.log('[Wishlist] AIRoute applied')
       setAIRouteDraft(tripId, 'draft')
+      console.log('[Wishlist] AIRoute draft set')
       toast.success('AI 已生成每日路线草稿')
       setTimeout(() => {
         navigate(`/trips/${tripId}/route`)
       }, 800)
     } catch (err) {
       const message = err instanceof Error ? err.message : 'AI 生成失败，请稍后再试'
+      console.error('[Wishlist] AI plan failed', err)
       toast.error(message)
     } finally {
       setIsAIPlanning(false)
