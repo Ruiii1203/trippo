@@ -91,7 +91,7 @@ export async function generateAIRoute(
   const timeoutId = setTimeout(() => controller.abort(), 180000)
 
   try {
-    console.log('[AI Planner] Calling ARK API', { url: ARK_BASE_URL, model: ARK_MODEL })
+    console.log('[AI Planner] Calling ARK API (streaming)', { url: ARK_BASE_URL, model: ARK_MODEL })
     const response = await fetch(`${ARK_BASE_URL}/chat/completions`, {
       method: 'POST',
       headers: {
@@ -105,9 +105,9 @@ export async function generateAIRoute(
           { role: 'user', content: userPrompt },
         ],
         temperature: 0.4,
+        stream: true,
       }),
       signal: controller.signal,
-      keepalive: true,
     })
 
     console.log('[AI Planner] ARK API response', { status: response.status })
@@ -118,8 +118,52 @@ export async function generateAIRoute(
       throw new Error(`AI 生成失败（${response.status}），请稍后再试`)
     }
 
-    const data = await response.json()
-    const content = data?.choices?.[0]?.message?.content || ''
+    const reader = response.body?.getReader()
+    if (!reader) {
+      throw new Error('无法读取响应流')
+    }
+
+    let content = ''
+    const decoder = new TextDecoder('utf-8')
+    let lastProgressTime = Date.now()
+
+    while (true) {
+      const { done, value } = await reader.read()
+      if (done) break
+
+      const chunk = decoder.decode(value)
+      console.log('[AI Planner] Received chunk', { length: chunk.length })
+
+      const lines = chunk.split('\n')
+      for (const line of lines) {
+        const trimmed = line.trim()
+        if (trimmed.startsWith('data: ')) {
+          const dataStr = trimmed.slice(6)
+          if (dataStr === '[DONE]') {
+            console.log('[AI Planner] Stream completed')
+            reader.releaseLock()
+            break
+          }
+          try {
+            const data = JSON.parse(dataStr)
+            const delta = data?.choices?.[0]?.delta?.content
+            if (delta) {
+              content += delta
+              lastProgressTime = Date.now()
+              console.log('[AI Planner] Accumulated content length:', content.length)
+            }
+          } catch (e) {
+            console.warn('[AI Planner] Failed to parse stream data:', dataStr)
+          }
+        }
+      }
+
+      if (Date.now() - lastProgressTime > 60000) {
+        throw new Error('AI 生成进度停滞，请稍后再试')
+      }
+    }
+
+    console.log('[AI Planner] Final content:', content)
 
     if (!content) {
       throw new Error('AI 返回内容为空，请重新生成')
