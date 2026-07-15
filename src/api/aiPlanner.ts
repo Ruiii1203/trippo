@@ -88,7 +88,7 @@ export async function generateAIRoute(
   const userPrompt = buildUserPrompt(trip, spots, totalDays)
 
   const controller = new AbortController()
-  const timeoutId = setTimeout(() => controller.abort(), 60000)
+  const timeoutId = setTimeout(() => controller.abort(), 180000)
 
   try {
     console.log('[AI Planner] Calling ARK API', { url: ARK_BASE_URL, model: ARK_MODEL })
@@ -107,6 +107,7 @@ export async function generateAIRoute(
         temperature: 0.4,
       }),
       signal: controller.signal,
+      keepalive: true,
     })
 
     console.log('[AI Planner] ARK API response', { status: response.status })
