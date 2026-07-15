@@ -88,9 +88,10 @@ export async function generateAIRoute(
   const userPrompt = buildUserPrompt(trip, spots, totalDays)
 
   const controller = new AbortController()
-  const timeoutId = setTimeout(() => controller.abort(), 120000)
+  const timeoutId = setTimeout(() => controller.abort(), 60000)
 
   try {
+    console.log('[AI Planner] Calling ARK API', { url: ARK_BASE_URL, model: ARK_MODEL })
     const response = await fetch(`${ARK_BASE_URL}/chat/completions`, {
       method: 'POST',
       headers: {
@@ -108,8 +109,11 @@ export async function generateAIRoute(
       signal: controller.signal,
     })
 
+    console.log('[AI Planner] ARK API response', { status: response.status })
+
     if (!response.ok) {
       const errText = await response.text().catch(() => '')
+      console.error('[AI Planner] ARK API error', { status: response.status, text: errText })
       throw new Error(`AI 生成失败（${response.status}），请稍后再试`)
     }
 
