@@ -173,5 +173,13 @@ export async function generateAIRoute(
 }
 
 export function isArkConfigured(): boolean {
-  return !!ARK_API_KEY && ARK_API_KEY !== 'YOUR_ARK_API_KEY'
+  const hasKey = !!ARK_API_KEY && ARK_API_KEY !== 'YOUR_ARK_API_KEY'
+  if (!hasKey) {
+    console.warn('[AI Planner] ARK API Key not configured', {
+      ARK_API_KEY: ARK_API_KEY ? 'present' : 'missing',
+      ARK_BASE_URL,
+      ARK_MODEL,
+    })
+  }
+  return hasKey
 }

@@ -118,7 +118,7 @@ function RoutePage() {
       return
     }
     if (!isArkConfigured()) {
-      toast.warning('请先配置火山方舟 API Key')
+      toast.warning('AI 功能暂不可用，请稍后再试')
       return
     }
     if (wishlisted.length < 3) {
@@ -126,13 +126,16 @@ function RoutePage() {
     }
     setIsRegenerating(true)
     try {
+      console.log('[AI Planner] Starting route generation', { tripId, wishlistedCount: wishlisted.length })
       const days = getTotalDays(trip.startDate, trip.endDate)
       const result = await generateAIRoute(trip, wishlisted, days)
+      console.log('[AI Planner] Route generation succeeded', { daysCount: result.days.length })
       applyAIRoute(tripId, result.days)
       setAIRouteDraft(tripId, 'draft')
       toast.success('AI 已重新生成路线草稿')
     } catch (err) {
       const message = err instanceof Error ? err.message : 'AI 生成失败，请稍后再试'
+      console.error('[AI Planner] Route generation failed', err)
       toast.error(message)
     } finally {
       setIsRegenerating(false)
